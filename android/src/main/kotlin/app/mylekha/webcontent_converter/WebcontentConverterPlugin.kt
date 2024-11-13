@@ -67,7 +67,7 @@ class WebcontentConverterPlugin : FlutterPlugin, MethodCallHandler, ActivityAwar
         var savedPath = arguments["savedPath"] as? String
         var margins = arguments["margins"] as Map<String, Double>?
         var format = arguments["format"] as Map<String, Double>?
-        var widthNeeded = arguments["width"] as Double?
+        var widthNeeded = arguments["width"] as int?
         var is_html2bitmap = arguments["is_html2bitmap"] as? Boolean ?: false
         if (duration == null) duration = 2000.00
         if(widthNeeded==null) widthNeeded=570
