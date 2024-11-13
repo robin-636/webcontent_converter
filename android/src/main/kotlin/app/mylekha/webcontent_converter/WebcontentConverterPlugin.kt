@@ -67,8 +67,10 @@ class WebcontentConverterPlugin : FlutterPlugin, MethodCallHandler, ActivityAwar
         var savedPath = arguments["savedPath"] as? String
         var margins = arguments["margins"] as Map<String, Double>?
         var format = arguments["format"] as Map<String, Double>?
+        var widthNeeded = arguments["width"] as Double?
         var is_html2bitmap = arguments["is_html2bitmap"] as? Boolean ?: false
         if (duration == null) duration = 2000.00
+        if(widthNeeded==null) widthNeeded=570
         val tag = "webcontent_converter";
 
         when (method) {
@@ -120,7 +122,7 @@ class WebcontentConverterPlugin : FlutterPlugin, MethodCallHandler, ActivityAwar
                 }
                 Log.w(tag, "\n activity $activity")
                 webView = WebView(this.context)
-                val dwidth = this.activity.window.windowManager.defaultDisplay.width
+                val dwidth = widthNeeded
                 val dheight = this.activity.window.windowManager.defaultDisplay.height
                 Log.w(tag, "\ndwidth : $dwidth")
                 Log.w(tag, "\ndheight : $dheight")
