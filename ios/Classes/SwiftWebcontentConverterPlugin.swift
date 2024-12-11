@@ -17,18 +17,18 @@ public class SwiftWebcontentConverterPlugin: NSObject, FlutterPlugin {
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    print("kjhgfdsdfghjk")
         let method = call.method
         let arguments = call.arguments as? [String: Any]
         let content = arguments!["content"] as? String
         var duration = arguments!["duration"] as? Double
-        var width = arguments["width"] as? Int
+        var width = arguments!["width"] as? Int ?? 570
         if(duration==nil){ duration = 2000.0}
-        if(width==nil){ width = 570}
+
         let desiredWidth: Double = Double(width)
         switch method {
         case "contentToImage":
             self.webView = WKWebView()
-            self.webView.isHidden = true
             self.webView.tag = 100
             let currentHeight = self.webView.frame.height
             self.webView.frame = CGRect(x: self.webView.frame.origin.x,
