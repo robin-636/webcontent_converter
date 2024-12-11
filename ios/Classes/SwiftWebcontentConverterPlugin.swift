@@ -21,12 +21,20 @@ public class SwiftWebcontentConverterPlugin: NSObject, FlutterPlugin {
         let arguments = call.arguments as? [String: Any]
         let content = arguments!["content"] as? String
         var duration = arguments!["duration"] as? Double
+        var width = arguments["width"] as? Int
         if(duration==nil){ duration = 2000.0}
+        if(width==nil){ width = 570}
+        let desiredWidth: Double = Double(width)
         switch method {
         case "contentToImage":
             self.webView = WKWebView()
             self.webView.isHidden = true
             self.webView.tag = 100
+            let currentHeight = self.webView.frame.height
+            self.webView.frame = CGRect(x: self.webView.frame.origin.x,
+                                         y: self.webView.frame.origin.y,
+                                         width: desiredWidth,
+                                         height: currentHeight)
             self.webView.loadHTMLString(content!, baseURL: Bundle.main.resourceURL)// load html into hidden webview
             var bytes = FlutterStandardTypedData.init(bytes: Data() )
             urlObservation = webView.observe(\.isLoading, changeHandler: { (webView, change) in
